@@ -11,10 +11,6 @@ Key Features:
         Users can submit recipes with a description, ingredients, instructions, and photos.
         Ingredients can be tagged with local names and nutritional values.
 
-    Location-Based Recipe Discovery:
-        Recipes are tagged with the user’s location.
-        Users can explore what’s popular in their area or discover regional recipes.
-
     Nutrition Analysis:
         The backend can analyze the nutritional content of each recipe (like calories, protein, carbs, etc.) based on ingredients provided.
         Users can set dietary preferences (e.g., vegan, gluten-free) and view relevant recipes.
@@ -26,16 +22,15 @@ Key Features:
     Recipe Collections:
         Users can save recipes to custom collections (e.g., “High-Protein,” “Budget-Friendly,” “Quick Meals”).
 
-    Weekly Local Ingredient Guide:
-        Based on the user’s location, the app provides a list of seasonal ingredients available in local markets and suggests recipes to make with them.
-
     Community Ratings and Feedback:
         Users can rate recipes and give feedback. They can also share their versions or tweaks, which encourages community interaction.
 
 Tech Stack:
 
     Backend (Django):
+        Firebase for user auth
         Django REST framework for the API.
+        sqlite for database
         Use Python libraries like django-nutrition (if available) or external APIs for basic nutritional analysis.
     Frontend (React):
         React for the user interface.
