@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const user = 'charlie';
+  const user = "";
 
   return (
     <nav>
       <section className="flex justify-between items-center px-4 md:px-8 py-4 bg-base shadow-sm shadow-second">
         <div>
-          <h1 className="text-xl md:text-3xl text-white font-bold">
-            Taste<span>Trail</span>
-          </h1>
+          <Link to={"/"}>
+            <h1 className="text-xl md:text-3xl text-white font-bold">
+              Taste<span>Trail</span>
+            </h1>
+          </Link>
         </div>
         <div>
           {user ? (
