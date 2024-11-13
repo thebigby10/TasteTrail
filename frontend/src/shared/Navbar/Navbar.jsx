@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const user = null;
+  const user = 'charlie';
 
   return (
     <nav>

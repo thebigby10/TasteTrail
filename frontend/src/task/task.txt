@@ -1,0 +1,40 @@
+<---- Add Recipe ---->
+1. title,
+2. imgUrl,
+3. tags []
+4. location
+5. Ingrediants
+6. description (markup)
+7. like [int]
+8. dislike [int]
+9. comments []
+
+
+
+{
+    "title": "Spaghetti Carbonara",
+    "imgUrl": "https://example.com/images/spaghetti-carbonara.jpg",
+    "tags": ["Italian", "Pasta", "Dinner"],
+    "location": "Rome, Italy",
+    "ingredients": [
+        "200g spaghetti",
+        "100g pancetta",
+        "2 large eggs",
+        "50g pecorino cheese",
+        "50g parmesan cheese",
+        "Salt and black pepper"
+    ],
+    "description": "<p>This classic Italian pasta dish is made with eggs, cheese, pancetta, and pepper.</p><p>It's simple yet delicious, perfect for a quick dinner.</p>",
+    "like": 120,
+    "dislike": 5,
+    "comments": [
+        {
+            "username": "foodie123",
+            "comment": "Tried this recipe, and it was amazing!"
+        },
+        {
+            "username": "chefMike",
+            "comment": "A simple, classic dish done right!"
+        }
+    ]
+}
