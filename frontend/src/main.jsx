@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
+        path: "/add-recipe",
+        element: <div>Add Recipe Form</div>
+      },
+      {
         path: "/login",
         element: <Login />,
       },
