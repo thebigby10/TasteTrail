@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const user = "";
+  const { user, logOut } = useAuth();
 
   return (
     <nav>
@@ -23,11 +24,12 @@ const Navbar = () => {
                   </button>
                 </Link>
               </div>
-              <Link to={"/logout"}>
-                <button className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase hover:scale-105 transition-transform">
-                  Logout
-                </button>
-              </Link>
+              <button
+                onClick={logOut}
+                className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase hover:scale-105 transition-transform"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <Link to={"/login"}>
