@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const LoginForm = ({ setEmail, setPassword, handleLogin }) => {
+const LoginForm = ({ setEmail, setPassword, handleLogin, loading }) => {
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
@@ -42,7 +42,7 @@ const LoginForm = ({ setEmail, setPassword, handleLogin }) => {
         />
         <span
           onClick={handleToggle}
-          className="absolute top-1/2 right-2 py-2 cursor-pointe text-sm"
+          className="absolute top-1/2 right-2 py-2 cursor-pointer text-sm"
         >
           {toggle ? "Hide" : "Show"}
         </span>
@@ -50,9 +50,10 @@ const LoginForm = ({ setEmail, setPassword, handleLogin }) => {
       <div className="form-control mt-6">
         <button
           onClick={handleLogin}
+          disabled={loading}
           className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase transition-transform"
         >
-          Login
+          {loading ? "Wait..." : "Login"}
         </button>
       </div>
       <div>
