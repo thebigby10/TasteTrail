@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const LoginForm = ({ setEmail, setPassword, handleLogin }) => {
+const LoginForm = ({ setEmail, setPassword, handleLogin, loading }) => {
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <form className="card-body">
       <div className="space-y-4">
@@ -17,29 +24,36 @@ const LoginForm = ({ setEmail, setPassword, handleLogin }) => {
         <input
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          placeholder="email"
+          placeholder="Email"
           className="px-4 py-2 border border-second rounded-sm"
           required
         />
       </div>
-      <div className="form-control">
+      <div className="form-control relative">
         <label className="label">
           <span className="label-text">Password</span>
         </label>
         <input
           onChange={(e) => setPassword(e.target.value)}
-          type="password"
+          type={`${toggle ? "text" : "password"}`}
           placeholder="***************"
           className="px-4 py-2 border border-second rounded-sm"
           required
         />
+        <span
+          onClick={handleToggle}
+          className="absolute top-1/2 right-2 py-2 cursor-pointer text-sm"
+        >
+          {toggle ? "Hide" : "Show"}
+        </span>
       </div>
       <div className="form-control mt-6">
         <button
           onClick={handleLogin}
+          disabled={loading}
           className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase transition-transform"
         >
-          Login
+          {loading ? "Wait..." : "Login"}
         </button>
       </div>
       <div>

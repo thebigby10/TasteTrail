@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const user = 'charlie';
+  const { user, logOut } = useAuth();
 
   return (
     <nav>
       <section className="flex justify-between items-center px-4 md:px-8 py-4 bg-base shadow-sm shadow-second">
         <div>
-          <h1 className="text-xl md:text-3xl text-white font-bold">
-            Taste<span>Trail</span>
-          </h1>
+          <Link to={"/"}>
+            <h1 className="text-xl md:text-3xl text-white font-bold">
+              Taste<span>Trail</span>
+            </h1>
+          </Link>
         </div>
         <div>
           {user ? (
@@ -21,11 +24,12 @@ const Navbar = () => {
                   </button>
                 </Link>
               </div>
-              <Link to={"/logout"}>
-                <button className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase hover:scale-105 transition-transform">
-                  Logout
-                </button>
-              </Link>
+              <button
+                onClick={logOut}
+                className="px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase hover:scale-105 transition-transform"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <Link to={"/login"}>

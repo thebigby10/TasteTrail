@@ -1,2 +1,5 @@
 __pycache__
 backend/archive/
+*.sqlite3
+*.pyc
+.env
