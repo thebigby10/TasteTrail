@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { uploadImage } from "../../utils/uploadImage";
+import axios from "axios";
 
 const AddRecipe = () => {
   const [title, setTitle] = useState("");
@@ -64,7 +65,16 @@ const AddRecipe = () => {
     });
 
     try {
-      const data = "data";
+      const data = await axios.post("http://127.0.0.1:8000/recipe/add/", {
+        title,
+        imgUrl: image || "",
+        tags,
+        location,
+        ingredients,
+        description,
+        creator: user?.email,
+      });
+      console.log(data);
       if (data) {
         Swal.fire({
           title: "Recipe added successfully",
