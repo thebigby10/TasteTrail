@@ -26,7 +26,7 @@ const Register = () => {
           toast.success("User Register Success");
           navigate("/");
           setLoading(false);
-          const data = await axios.post("http://127.0.0.1:8000/user/register", {
+          const data = await axios.post("http://127.0.0.1:8000/user/register/", {
             fullName,
             email,
             imageUrl,
