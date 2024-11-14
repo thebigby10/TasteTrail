@@ -5,14 +5,13 @@ def addPost(request):
     if request.method == "POST":
 
         post.objects.create(
+            
             title=request.POST['title'],
             imgUrl=request.POST['image'],
             tags=request.POST['tags'],
             location=request.POST['location'],
             ingredients=request.POST['ingredients'],
             description=request.POST['description'],
-            likes=request.POST['likes'],
-            dislikes=request.POST['dislikes'],
             comments=request.POST['comments'],
 
         )
