@@ -1,24 +1,20 @@
 from django.db import models
-from user.models import user
+from user.models import User
+import uuid
+
 # Create your models here.
-class post(models.Model):
-    postID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Recipe(models.Model):
+    postID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     title = models.CharField(max_length=100)
     imgUrl = models.URLField(max_length=1000)
-    tags = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    tags = models.JSONField(default = list)
     location = models.TextField()
-    ingredients = models.TextField()
+    ingredients = models.JSONField(default = list)
     description = models.TextField()
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
+    likes = models.JSONField(default=list)
+    dislikes = models.JSONField(default=list)
     comments = models.JSONField(default=list)
-    comment = models.JSONField()
-
-class LikeDislike(models.Model):
-    postID = models.ForeignKey(post, on_delete=models.CASCADE)
-    userID = models.ForeignKey(user, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.postID
+        return self.title
