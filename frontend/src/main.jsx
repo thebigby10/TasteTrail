@@ -8,6 +8,7 @@ import Login from "./shared/Login/Login";
 import Register from "./shared/Register/Register";
 import AuthProvider from "./providers/AuthProvider";
 import {Toaster} from "react-hot-toast"
+import AddRecipe from "./pages/Recipe/AddRecipe";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-recipe",
-        element: <div>Add Recipe Form</div>
+        element: <AddRecipe/>
       },
       {
         path: "/login",
