@@ -9,6 +9,7 @@ from recipe.models import Recipe
 from user.models import User
 
 from django.forms.models import model_to_dict
+from django.core import serializers
 
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -36,5 +37,13 @@ def all_post(request):
         recipes = Recipe.objects.all()
         recipe_list = []
         for recipe in recipes:
-            recipe_list.append(model_to_dict(recipe))
+            # recipe.pk = recipe.postID
+            recipe_list.append({'pk':recipe.postID,'data':model_to_dict(recipe)})
+            # print(recipe[postID])
         return JsonResponse(recipe_list, status=200, safe=False)
+
+def get_post(request, post_id):
+    if request.method == 'GET':
+        recipe = Recipe.objects.get(postID = post_id)
+        recipe_dict = model_to_dict(recipe)
+        return JsonResponse(recipe_dict, status=200, safe=False)
