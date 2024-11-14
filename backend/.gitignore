@@ -1,2 +1,4 @@
-__pycache__/
+recipe/__pycache__/
+TasteTrail_backend/__pycache__/
+user/__pycache__/
 archive/
