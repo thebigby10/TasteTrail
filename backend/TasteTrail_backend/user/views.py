@@ -6,13 +6,14 @@ from django.http import HttpResponse
 
 from user.models import User
 # Create your views here.
+
 def register(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         fullname = data['fullName']
         email = data['email']
         imageUrl = data['imageUrl']
-
+        print(f"data: {fullname}, {email}, {imageUrl}")
         if(User.objects.filter(email=email).exists()):
             return HttpResponse(status=409)
         else:
