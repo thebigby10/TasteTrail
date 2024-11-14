@@ -1,5 +1,7 @@
 import { useState } from "react";
 import RecipeForm from "../../components/RecipeForm";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const AddRecipe = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +12,8 @@ const AddRecipe = () => {
   const [description, setDescription] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [ingredientInput, setIngredientInput] = useState("");
+
+  const navigate = useNavigate();
 
   const handleAddTag = () => {
     if (tagInput.trim()) {
@@ -35,9 +39,37 @@ const AddRecipe = () => {
     setIngredients(updatedIngredients);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.table({ title, imgUrl, tags, location, ingredients, description });
+
+    try {
+        const data = 'data';
+        if(data) {
+            Swal.fire({
+                title:"Recipe added successfully",
+                text: "Are you want to add more recipe?",
+                icon: "success",
+                showCancelButton: true,
+                cancelButtonText: "No",
+                confirmButtonColor: "#7E8940",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  navigate("/add-recipe");
+                  e.target.reset();
+                  setTagInput("");
+                  setIngredientInput("");
+                }else{
+                    navigate("/");
+                }
+              });
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   return (
