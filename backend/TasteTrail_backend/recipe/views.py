@@ -1,9 +1,8 @@
 from recipe.models import post
 from django.shortcuts import render
 
-def addPost(request):
+def post(request):
     if request.method == "POST":
-
         post.objects.create(
             
             title=request.POST['title'],
