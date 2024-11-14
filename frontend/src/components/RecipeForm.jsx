@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 
 const RecipeForm = ({
   setTitle,
-  setImgUrl,
   setLocation,
   setIngredientInput,
   setDescription,
@@ -18,6 +17,7 @@ const RecipeForm = ({
   ingredientInput,
   handleRemoveTag,
   handleRemoveIngredient,
+  loading,
 }) => {
   const handleKeyPressTag = (e) => {
     if (e.key === " " && tagInput.trim()) {
@@ -49,10 +49,10 @@ const RecipeForm = ({
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold">Image URL</label>
+          <label className="block text-gray-700 font-semibold">Image</label>
           <input
-            type="url"
-            onChange={(e) => setImgUrl(e.target.value)}
+            type="file"
+            name="image"
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
           />
         </div>
@@ -130,10 +130,11 @@ const RecipeForm = ({
 
         <div className="col-span-1 md:col-span-2">
           <button
+            disabled={loading}
             type="submit"
             className="w-full px-4 py-2 bg-second text-white font-semibold rounded"
           >
-            Submit Recipe
+            {loading ? "Please Wait..." : "Submit Recipe"}
           </button>
         </div>
       </form>

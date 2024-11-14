@@ -21,22 +21,25 @@ const Register = () => {
 
     try {
       setLoading(true);
-      await createUser(email, password).then(() => {
-        updateUser(fullName, imageUrl).then(async () => {
-          toast.success("User Register Success");
-          navigate("/");
-          setLoading(false);
-          const data = await axios.post("http://127.0.0.1:8000/user/register/", {
-            fullName,
-            email,
-            imageUrl,
-          });
-          console.log(data);
-        });
+      const data = await axios.post("http://127.0.0.1:8000/user/register/", {
+        fullName,
+        email,
+        imageUrl,
       });
+      if (data.status == 200) {
+        await createUser(email, password).then(() => {
+          updateUser(fullName, imageUrl).then(() => {
+            toast.success("User Register Success");
+            navigate("/");
+            setLoading(false);
+          });
+        });
+      }
     } catch (error) {
       toast.error(error.message || error);
-      setLoading(false); 
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 

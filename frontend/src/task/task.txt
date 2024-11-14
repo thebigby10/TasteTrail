@@ -36,5 +36,6 @@
             "username": "chefMike",
             "comment": "A simple, classic dish done right!"
         }
-    ]
+    ],
+    "creator": "email@gmail.com"
 }
