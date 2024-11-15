@@ -17,8 +17,13 @@ class Recipe(models.Model):
     likes = models.JSONField(default=list)
     dislikes = models.JSONField(default=list)
     comments = models.JSONField(default=list)
-    creation_time = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
+class TrendingRecipe(models.Model):
+    postID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
 
     def __str__(self):
         return self.title
