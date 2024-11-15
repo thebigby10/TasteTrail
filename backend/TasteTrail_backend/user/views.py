@@ -28,10 +28,10 @@ def register(request):
             user.save()
             return HttpResponse(status=200)
 
-#/user/follow/{user_id}/
+#/user/follow/
 def follow(request, post_id):
-
-
-#/user/unfollow/{user_id}/
-def unfollow(request, post_id):
     return 1
+
+#/user/unfollow/
+def unfollow(request, post_id):
+    return -1
