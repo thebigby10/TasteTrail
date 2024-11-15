@@ -54,6 +54,7 @@ const RecipeForm = ({
             type="file"
             name="image"
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
+            required
           />
         </div>
 
@@ -125,6 +126,7 @@ const RecipeForm = ({
             onChange={setDescription}
             className="bg-white border border-gray-300 rounded focus:outline-none focus:border-second h-40 mb-6"
             placeholder="Detailed Recipe Description..."
+            required
           />
         </div>
 
