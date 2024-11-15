@@ -65,6 +65,7 @@ const AddRecipe = () => {
     // });
 
     try {
+      setLoading(true);
       if (image) {
         const data = await axios.post("http://127.0.0.1:8000/recipe/add/", {
           title,
