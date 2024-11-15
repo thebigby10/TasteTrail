@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ const Login = () => {
   const { loginUser, loading, setLoading } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const Login = () => {
       setLoading(true);
       await loginUser(email, password);
       toast.success("Login Success");
-      navigate("/");
+      navigate(location?.state ? `${location?.state}` : "/");
     } catch (error) {
       toast.error(error.message || "An error occurred");
     } finally {

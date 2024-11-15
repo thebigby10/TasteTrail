@@ -11,6 +11,6 @@ export const uploadImage = async (image) => {
     );
     return data.data.display_url;
   } catch (error) {
-    toast.error(`${error.message}`);
+    toast.error(`Error while updloading image: ${error.message}`);
   }
 };

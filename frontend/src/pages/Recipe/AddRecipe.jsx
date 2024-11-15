@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { uploadImage } from "../../utils/uploadImage";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddRecipe = () => {
   const [title, setTitle] = useState("");
@@ -54,51 +55,43 @@ const AddRecipe = () => {
 
     const image = await imgbb(e.target.image.files[0]);
 
-    console.log({
-      title,
-      imgUrl: image || "",
-      tags,
-      location,
-      ingredients,
-      description,
-      creator: user?.email,
-    });
+    // console.log({
+    //   title,
+    //   imgUrl: image || "",
+    //   tags,
+    //   location,
+    //   ingredients,
+    //   description,
+    //   creator: user?.email,
+    // });
 
     try {
-      const data = await axios.post("http://127.0.0.1:8000/recipe/add/", {
-        title,
-        imgUrl: image || "",
-        tags,
-        location,
-        ingredients,
-        description,
-        creator: user?.email,
-      });
-      console.log(data);
-      if (data) {
+      setLoading(true);
+      if (image) {
+        const data = await axios.post("http://127.0.0.1:8000/recipe/add/", {
+          title,
+          imgUrl: image || "",
+          tags,
+          location,
+          ingredients,
+          description,
+          creator: user?.email,
+        });
+
+        if (data.status == 200) {
+          toast.success("Recipe Added Successfully");
+          navigate("/");
+        }
+      } else {
         Swal.fire({
-          title: "Recipe added successfully",
-          text: "Are you want to add more recipe?",
-          icon: "success",
-          showCancelButton: true,
-          cancelButtonText: "No",
-          confirmButtonColor: "#7E8940",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/add-recipe");
-            e.target.reset();
-            setTagInput("");
-            setIngredientInput("");
-          } else {
-            navigate("/");
-          }
+          icon: "error",
+          text: "Upload Image Again",
+          confirmButtonColor: "#7e8940",
         });
       }
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
