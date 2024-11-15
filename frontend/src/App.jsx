@@ -17,11 +17,13 @@ function App() {
   console.log(recipes[0]);
   return (
     <>
-      {recipes.map((r, idx) => (
-        <div key={idx}>
-          <SingleRecipe recipe={r} />
-        </div>
-      ))}
+      <div className="space-y-12 bg-white">
+        {recipes.map((r, idx) => (
+          <div key={idx}>
+            <SingleRecipe recipe={r} />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
