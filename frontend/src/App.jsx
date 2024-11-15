@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchRecipes } from "./utils/api";
 import SingleRecipe from "./components/SingleRecipe";
-import { Link } from "react-router-dom";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -15,13 +14,13 @@ function App() {
     fetch();
   }, []);
 
-  // console.log(recipes[0]?.data);
+  console.log(recipes[0]);
   return (
     <>
       {recipes.map((r, idx) => (
-        <Link to={`recipe-details/${r?.pk}`} key={idx}>
+        <div key={idx}>
           <SingleRecipe recipe={r} />
-        </Link>
+        </div>
       ))}
     </>
   );
