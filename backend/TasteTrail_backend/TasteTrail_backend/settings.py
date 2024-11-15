@@ -85,6 +85,8 @@ DATABASES = {
         'NAME': 'tastetrail_db',
         'USER': 'admin',
         'PASSWORD': 'admin',
+        'HOST':'localhost', #needs update
+        'PORT':'3306',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -132,4 +134,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True

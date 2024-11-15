@@ -17,7 +17,7 @@ class Recipe(models.Model):
     likes = models.JSONField(default=list)
     dislikes = models.JSONField(default=list)
     comments = models.JSONField(default=list)
-    creation_time = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):

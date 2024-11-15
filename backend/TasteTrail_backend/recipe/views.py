@@ -13,6 +13,8 @@ from django.core import serializers
 
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+
+# recipe/add/
 @csrf_exempt
 def add(request):
     if request.method == 'POST':
@@ -32,6 +34,7 @@ def add(request):
         recipe.save()
     return HttpResponse(status=200)
 
+# recipe/
 def all_post(request):
     if request.method == 'GET':
         recipes = Recipe.objects.all()
@@ -42,12 +45,14 @@ def all_post(request):
             # print(recipe[postID])
         return JsonResponse(recipe_list, status=200, safe=False)
 
+# /recipe/{post_id}/
 def get_post(request, post_id):
     if request.method == 'GET':
         recipe = Recipe.objects.get(postID = post_id)
         recipe_dict = model_to_dict(recipe)
         return JsonResponse(recipe_dict, status=200, safe=False)
 
+# /recipe/delete/{post_id}/
 def delete(request, post_id):
     if request.method == 'DELETE':
         recipe = Recipe.objects.get(postID = post_id)
