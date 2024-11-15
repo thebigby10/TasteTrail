@@ -24,6 +24,7 @@ class Recipe(models.Model):
 
 class TrendingRecipe(models.Model):
     postID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    trend_score = models.FloatField(default=0)
 
     def __str__(self):
         return self.title

@@ -5,8 +5,9 @@ import json
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from recipe.models import Recipe
+from recipe.models import Recipe,TrendingRecipe
 from user.models import User
+
 
 from django.forms.models import model_to_dict
 from django.core import serializers
@@ -49,7 +50,7 @@ def all_post(request, user_email):
         # get all the recipes from following
         following = User.objects.get(email='test@gmail.com').following.all()
         # get all the trending recipes
-
+        trending = calculateTrending()
         # get all the random recipes
         recipe_list = []
         for recipe in recipes:
@@ -62,13 +63,27 @@ def trending(request):
     if request.method == 'GET':
         return -1;
 
+def get_trending():
+    trending = TrendingRecipe.objects.all()
+    trending_list = []
+    for recipe in trending:
+        trending_list.append(recipe)
+    return trending_list
+
 def calculateTrending():
-    t_recipes = Recipe.objects.filter(timezone.now() - created_at < timedelta(days=7))
+    TrendingRecipe.objects.all().delete()
+
+    # needs fixing iguess
+    t_recipes = Recipe.objects.filter(created_at__gte=timezone.now() - timedelta(days=7))
+
     trending_post = []
     for recipe in t_recipes:
         like_dislike_factor = (recipe.likes.count() - recipe.dislikes.count()) / (1+ recipe.dislikes.count())
         time_decay = 1 / (1 + recipe.created_at - timezone.now())
         trending_score = like_dislike_factor *0.7 + time_decay * 0.3
+        TrendingRecipe.save(TrendingRecipe(recipe.postID,trending_score))
+        trending_post.append({'pk':recipe.postID,'score':trending_score})
+    sorted(trending_post, key=lambda recipe: recipe['score'], reverse=True)
 
 
 # /recipe/{post_id}/
