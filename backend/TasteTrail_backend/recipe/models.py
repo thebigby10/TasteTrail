@@ -2,6 +2,8 @@ from django.db import models
 from user.models import User
 import uuid
 
+import datetime
+
 # Create your models here.
 class Recipe(models.Model):
     postID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
@@ -15,6 +17,8 @@ class Recipe(models.Model):
     likes = models.JSONField(default=list)
     dislikes = models.JSONField(default=list)
     comments = models.JSONField(default=list)
+    creation_time = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.title
