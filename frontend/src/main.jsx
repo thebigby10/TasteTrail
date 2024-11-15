@@ -7,8 +7,9 @@ import App from "./App";
 import Login from "./shared/Login/Login";
 import Register from "./shared/Register/Register";
 import AuthProvider from "./providers/AuthProvider";
-import {Toaster} from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
 import AddRecipe from "./pages/Recipe/AddRecipe";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-recipe",
-        element: <AddRecipe/>
+        element: (
+          <PrivateRoute>
+            <AddRecipe />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -40,6 +45,6 @@ createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-    <Toaster/>
+    <Toaster />
   </StrictMode>
 );
