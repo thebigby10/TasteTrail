@@ -47,3 +47,10 @@ def get_post(request, post_id):
         recipe = Recipe.objects.get(postID = post_id)
         recipe_dict = model_to_dict(recipe)
         return JsonResponse(recipe_dict, status=200, safe=False)
+
+@csrf_exempt
+def delete(request, post_id):
+    if request.method == 'DELETE':
+        recipe = Recipe.objects.get(postID = post_id)
+        recipe.delete()
+        return HttpResponse(status=200)
