@@ -6,7 +6,6 @@ const RegisterForm = ({
   setFullName,
   setEmail,
   setPassword,
-  setImageUrl,
   handleRegister,
   loading,
 }) => {
@@ -17,7 +16,7 @@ const RegisterForm = ({
   };
 
   return (
-    <form className="card-body">
+    <form className="card-body" onSubmit={handleRegister}>
       <div className="space-y-4">
         <h1 className="text-center text-2xl uppercase font-semibold text-second">
           Register Now
@@ -70,21 +69,18 @@ const RegisterForm = ({
         </span>
       </div>
 
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Image URL</span>
-        </label>
+      <div>
+        <label className="block text-gray-700 font-semibold">Image</label>
         <input
-          onChange={(e) => setImageUrl(e.target.value)}
-          type="url"
-          placeholder="Image URL"
-          className="px-4 py-2 border border-second rounded-sm"
+          type="file"
+          name="image"
+          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
         />
       </div>
 
       <div className="form-control mt-6">
         <button
-          onClick={handleRegister}
+          type="submit"
           disabled={loading}
           className={`px-2 md:px-4 py-2 bg-second text-sm rounded-sm text-white font-semibold uppercase transition-transform`}
         >
