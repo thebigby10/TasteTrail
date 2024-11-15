@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from user.models import User
 
 from django.views.decorators.csrf import csrf_exempt
+
+# user/register/
 # Create your views here.
 @csrf_exempt
 def register(request):
@@ -25,3 +27,11 @@ def register(request):
             user = User(fullName=fullname, email=email, imageUrl=imageUrl)
             user.save()
             return HttpResponse(status=200)
+
+#/user/follow/
+def follow(request, post_id):
+    return 1
+
+#/user/unfollow/
+def unfollow(request, post_id):
+    return -1
