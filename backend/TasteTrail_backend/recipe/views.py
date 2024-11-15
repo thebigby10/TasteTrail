@@ -95,8 +95,7 @@ def user_post(request,user_email):
     posts = Recipe.objects.filter(user_id=user_email)
     posts_json = []
     for post in posts:
-        post_json = model_to_dict(post)
-        posts_json.append(post_json)
+        posts_json.append({'pk':post.postID,'data':model_to_dict(post)})
     return JsonResponse(posts_json, status=200, safe=False)
 
 # path('user_post/user_email=<str:user_email>', views.user_post, name = 'user_post'),
