@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete/<uuid:post_id>', views.delete, name = 'delete'),
     path('user_post/user_email=<str:user_email>', views.user_post, name = 'user_post'),
     path('trending/', views.trending, name = 'trending'),
+    path('like/', views.like, name = 'like'),
+    path('dislike/', views.dislike, name = 'dislike'),
 ]
