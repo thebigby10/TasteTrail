@@ -119,14 +119,23 @@ def delete(request, post_id):
 #/recipe/like?postID={postID}
 
 #/recipe/user_post/user_email={user_email}/
+
 @csrf_exempt
-def user_post(request,user_email):
+
+def user_post(request, user_email):
+
     # user_email = request.GET.get('user_email', None)
     print(user_email)
     user = User.objects.get(email=user_email)
     posts = Recipe.objects.filter(user_id=user_email)
     posts_json = []
     for post in posts:
+        post.userID = {'fullName':user.fullName,'email':user.email,'imageUrl':user.imageUrl}
+        created_at = post.created_at
+        time_diff = timesince(created_at, datetime.now(timezone.utc))
+        posts_json.append({'pk':post.postID,'user':post.userID,'data':model_to_dict(post), 'created_at':f"{time_diff} ago"})
+        # print(recipe.userID)
+        # print(recipe[postID])
         posts_json.append({'pk':post.postID,'data':model_to_dict(post)})
     return JsonResponse(posts_json, status=200, safe=False)
 
@@ -135,3 +144,11 @@ def user_post(request,user_email):
 def run_tasks(request):
     message = trigger_task()
     return HttpResponse(message)
+# recipe/like/
+def like(request, post_id):
+    if request.method == 'PUT':
+        return
+# recipe/dislike/
+def dislike(request, post_id):
+    if request.method == 'PUT':
+        return
