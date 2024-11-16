@@ -15,6 +15,9 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 import datetime
+import random
+
+# from recipe.trending_calculate import trigger_task
 
 # Create your views here.
 
@@ -38,8 +41,21 @@ def add(request):
         recipe.save()
     return HttpResponse(status=200)
 
+#return random 10 posts
+#recipe/
+def all_post(request):
+    if request.method == 'GET':
+        recipes = Recipe.objects.order_by('?')[:10]
+        recipe_list = []
+        # get all the random recipes
+        for recipe in recipes:
+            # recipe.pk = recipe.postID
+            recipe_list.append({'pk':recipe.postID,'data':model_to_dict(recipe)})
+            # print(recipe[postID])
+        return JsonResponse(recipe_list, status=200, safe=False)
+
 # recipe?user_email={user_email}
-def all_post(request, user_email):
+def all_posts(request, user_email):
     # send only 10 posts at a time
     # following : 4
     # Trending : 4
@@ -59,9 +75,14 @@ def all_post(request, user_email):
             # print(recipe[postID])
         return JsonResponse(recipe_list, status=200, safe=False)
 
+# recipe/trending/
 def trending(request):
+    recipes = Recipe.objects.order_by('-likes')[:15]
     if request.method == 'GET':
-        return -1;
+        recipe_list = []
+        for recipe in recipes:
+            recipe_list.append({'pk':recipe.postID,'data':model_to_dict(recipe)})
+        return JsonResponse(recipe_list, status=200, safe=False)
 
 def get_trending():
     trending = TrendingRecipe.objects.all()
@@ -69,21 +90,6 @@ def get_trending():
     for recipe in trending:
         trending_list.append(recipe)
     return trending_list
-
-def calculateTrending():
-    TrendingRecipe.objects.all().delete()
-
-    # needs fixing iguess
-    t_recipes = Recipe.objects.filter(created_at__gte=timezone.now() - timedelta(days=7))
-
-    trending_post = []
-    for recipe in t_recipes:
-        like_dislike_factor = (recipe.likes.count() - recipe.dislikes.count()) / (1+ recipe.dislikes.count())
-        time_decay = 1 / (1 + recipe.created_at - timezone.now())
-        trending_score = like_dislike_factor *0.7 + time_decay * 0.3
-        TrendingRecipe.save(TrendingRecipe(recipe.postID,trending_score))
-        trending_post.append({'pk':recipe.postID,'score':trending_score})
-    sorted(trending_post, key=lambda recipe: recipe['score'], reverse=True)
 
 
 # /recipe/{post_id}/
@@ -94,6 +100,7 @@ def get_post(request, post_id):
         return JsonResponse(recipe_dict, status=200, safe=False)
 
 # /recipe/delete/{post_id}/
+@csrf_exempt
 def delete(request, post_id):
     if request.method == 'DELETE':
         recipe = Recipe.objects.get(postID = post_id)
@@ -114,3 +121,7 @@ def user_post(request,user_email):
     return JsonResponse(posts_json, status=200, safe=False)
 
 # path('user_post/user_email=<str:user_email>', views.user_post, name = 'user_post'),
+
+def run_tasks(request):
+    message = trigger_task()
+    return HttpResponse(message)
