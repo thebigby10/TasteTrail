@@ -131,8 +131,6 @@ def user_post(request, user_email):
         time_diff = timesince(created_at, datetime.now(timezone.utc))
         posts_json.append({'pk':post.postID,'user':post.userID,'data':model_to_dict(post), 'created_at':f"{time_diff} ago"})
         # print(recipe.userID)
-        # print(recipe[postID])
-        posts_json.append({'pk':post.postID,'data':model_to_dict(post)})
     return JsonResponse(posts_json, status=200, safe=False)
 
 # path('user_post/user_email=<str:user_email>', views.user_post, name = 'user_post'),
