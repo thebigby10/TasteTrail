@@ -28,10 +28,48 @@ def register(request):
             user.save()
             return HttpResponse(status=200)
 
+
+#/user/followings/{user_email}/
+def followings(request, user_email):
+    print(user_email)
+    user = User.objects.get(email=user_email)
+    followers = user.following.all()
+    followers_json = []
+    for follower in followers:
+        user = User.objects.get(email=follower.email)
+        followers_json.append(model_to_dict(user))
+    return JsonResponse(followers_json, status=200, safe=False)
+
+#/user/followers/{user_email}/
+def followers(request, user_email):
+    print(user_email)
+    user = User.objects.get(email=user_email)
+    followers = user.followers.all()
+    followers_json = []
+    for follower in followers:
+        user = User.objects.get(email=follower.email)
+        followers_json.append(model_to_dict(user))
+    return JsonResponse(followers_json, status=200, safe=False)
+
 #/user/follow/
-def follow(request, post_id):
-    return 1
+def follow(request):
+    data = json.loads(request.body)
+    follower_email = data['followerEmail']
+    following_email = data['followingEmail']
+    follower_user = User.objects.get(email=follower_email)
+    following_user = User.objects.get(email=following_email)
+    follower_user.following_user.append(following_user)
+    following_user.followers_user.append(follower_user)
+    return HttpResponse(status=200)
+
 
 #/user/unfollow/
-def unfollow(request, post_id):
-    return -1
+def unfollow(request):
+    data = json.loads(request.body)
+    unfollower_email = data['unfollowerEmail']
+    unfollowing_email = data['unfollowingEmail']
+    unfollower_user = User.objects.get(email=unfollower_email)
+    unfollowing_user = User.objects.get(email=unfollowing_email)
+    unfollower_user.following_user.remove(unfollowing_user)
+    unfollowing_user.followers_user.remove(unfollower_user)
+    return HttpResponse(status=200)

@@ -123,7 +123,7 @@ def user_post(request, user_email):
     # user_email = request.GET.get('user_email', None)
     print(user_email)
     user = User.objects.get(email=user_email)
-    posts = Recipe.objects.filter(user_id=user_email)
+    posts = Recipe.objects.filter(user_id=user_email).order_by('-created_at')
     posts_json = []
     for post in posts:
         post.userID = {'fullName':user.fullName,'email':user.email,'imageUrl':user.imageUrl}
@@ -131,8 +131,6 @@ def user_post(request, user_email):
         time_diff = timesince(created_at, datetime.now(timezone.utc))
         posts_json.append({'pk':post.postID,'user':post.userID,'data':model_to_dict(post), 'created_at':f"{time_diff} ago"})
         # print(recipe.userID)
-        # print(recipe[postID])
-        posts_json.append({'pk':post.postID,'data':model_to_dict(post)})
     return JsonResponse(posts_json, status=200, safe=False)
 
 # path('user_post/user_email=<str:user_email>', views.user_post, name = 'user_post'),
@@ -140,11 +138,58 @@ def user_post(request, user_email):
 def run_tasks(request):
     message = trigger_task()
     return HttpResponse(message)
+
 # recipe/like/
-def like(request, post_id):
+@csrf_exempt
+def like(request):
     if request.method == 'PUT':
-        return
+        data = json.loads(request.body)
+        postID = data['postID']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = postID)
+        recipe_likes = recipe.likes
+        # print(recipe_likes)
+        #find if the user already liked the recipe
+        if userEmail not in recipe_likes:
+            recipe_likes.append(userEmail)
+            recipe_dislikes = recipe.dislikes
+            if userEmail in recipe_dislikes:
+                recipe_dislikes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        else:
+            recipe_likes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        # if(recipe.likes.count(user_email) == 0):
+            # recipe.likes.append(user_email)
+            # recipe.save()
+        # return HttpResponse(status=200)
+
+
 # recipe/dislike/
-def dislike(request, post_id):
+@csrf_exempt
+def dislike(request):
     if request.method == 'PUT':
-        return
+        data = json.loads(request.body)
+        postID = data['postID']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = postID)
+        recipe_dislikes = recipe.dislikes
+        # print(recipe_likes)
+        #find if the user already liked the recipe
+        if userEmail not in recipe_dislikes:
+            recipe_dislikes.append(userEmail)
+            recipe_likes = recipe.likes
+            if userEmail in recipe_likes:
+                recipe_likes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        else:
+            recipe_dislikes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        # if(recipe.likes.count(user_email) == 0):
+            # recipe.likes.append(user_email)
+            # recipe.save()
+        # return HttpResponse(status=200)
