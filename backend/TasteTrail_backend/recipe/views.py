@@ -123,7 +123,7 @@ def user_post(request, user_email):
     # user_email = request.GET.get('user_email', None)
     print(user_email)
     user = User.objects.get(email=user_email)
-    posts = Recipe.objects.filter(user_id=user_email)
+    posts = Recipe.objects.filter(user_id=user_email).order_by('-created_at')
     posts_json = []
     for post in posts:
         post.userID = {'fullName':user.fullName,'email':user.email,'imageUrl':user.imageUrl}
