@@ -17,7 +17,7 @@ export function Sidebar() {
     }`;
 
   return (
-    <Card className="h-[calc(100vh-40px)] w-12 md:w-44 flex flex-col justify-between p-1 md:p-4">
+    <Card className="h-[calc(100vh-40px)] w-12 md:w-44 flex flex-col rounded-none justify-between p-1 md:p-4">
       <List className="space-y-6">
         <ListItem>
           <NavLink to="/" className={linkClasses}>
