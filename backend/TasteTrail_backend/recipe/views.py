@@ -17,6 +17,9 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 import random
 
+from datetime import datetime, timezone
+from django.utils.timesince import timesince
+
 # from recipe.trending_calculate import trigger_task
 
 # Create your views here.
@@ -53,8 +56,10 @@ def all_post(request):
             # recipex = recipe
             user = User.objects.get(email=recipe.user_id)
             recipe.userID = {'fullName':user.fullName,'email':user.email,'imageUrl':user.imageUrl}
-            recipe_list.append({'pk':recipe.postID,'user':recipe.userID,'data':model_to_dict(recipe)})
-            print(recipe.userID)
+            created_at = recipe.created_at
+            time_diff = timesince(created_at, datetime.now(timezone.utc))
+            recipe_list.append({'pk':recipe.postID,'user':recipe.userID,'data':model_to_dict(recipe), 'created_at':f"{time_diff} ago"})
+            # print(recipe.userID)
             # print(recipe[postID])
         return JsonResponse(recipe_list, status=200, safe=False)
 
