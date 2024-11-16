@@ -138,11 +138,58 @@ def user_post(request, user_email):
 def run_tasks(request):
     message = trigger_task()
     return HttpResponse(message)
+
 # recipe/like/
-def like(request, post_id):
+@csrf_exempt
+def like(request):
     if request.method == 'PUT':
-        return
+        data = json.loads(request.body)
+        postID = data['postID']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = postID)
+        recipe_likes = recipe.likes
+        # print(recipe_likes)
+        #find if the user already liked the recipe
+        if userEmail not in recipe_likes:
+            recipe_likes.append(userEmail)
+            recipe_dislikes = recipe.dislikes
+            if userEmail in recipe_dislikes:
+                recipe_dislikes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        else:
+            recipe_likes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        # if(recipe.likes.count(user_email) == 0):
+            # recipe.likes.append(user_email)
+            # recipe.save()
+        # return HttpResponse(status=200)
+
+
 # recipe/dislike/
-def dislike(request, post_id):
+@csrf_exempt
+def dislike(request):
     if request.method == 'PUT':
-        return
+        data = json.loads(request.body)
+        postID = data['postID']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = postID)
+        recipe_dislikes = recipe.dislikes
+        # print(recipe_likes)
+        #find if the user already liked the recipe
+        if userEmail not in recipe_dislikes:
+            recipe_dislikes.append(userEmail)
+            recipe_likes = recipe.likes
+            if userEmail in recipe_likes:
+                recipe_likes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        else:
+            recipe_dislikes.remove(userEmail)
+            recipe.save()
+            return HttpResponse(status=200)
+        # if(recipe.likes.count(user_email) == 0):
+            # recipe.likes.append(user_email)
+            # recipe.save()
+        # return HttpResponse(status=200)
