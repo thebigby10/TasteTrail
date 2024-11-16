@@ -8,7 +8,8 @@ import DropDown from "./DropDown";
 const SingleRecipe = ({ recipe, setControl, control }) => {
   const { user: currentUser } = useAuth();
 
-  console.log(currentUser);
+  // console.log(currentUser);
+  console.log(recipe);
 
   const { pk, user, data, created_at } = recipe || {};
   const { imgUrl: recipeImg, title, description, likes, dislikes, comments } = data || {};
