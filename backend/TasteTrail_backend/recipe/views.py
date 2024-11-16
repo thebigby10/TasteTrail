@@ -118,7 +118,7 @@ def delete(request, post_id):
 
 #/recipe/like?postID={postID}
 
-#/recipe/user_postuser_email={user_email}/
+#/recipe/user_post/user_email={user_email}/
 @csrf_exempt
 def user_post(request,user_email):
     # user_email = request.GET.get('user_email', None)
