@@ -5,6 +5,7 @@ import Recipes from "../Recipe/Recipes";
 
 const ProfilePage = () => {
   const [recipes, setRecipes] = useState([]);
+  const [control, setControl] = useState(true)
   const { user } = useAuth();
 
   const fetch = async () => {
@@ -14,12 +15,12 @@ const ProfilePage = () => {
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [control]);
   return (
     <div>
       <div>Profile Here.</div>
       <div>
-        <Recipes recipes={recipes} />
+        <Recipes control={control} setControl={setControl} recipes={recipes} />
       </div>
     </div>
   );
