@@ -15,7 +15,7 @@ function App() {
     fetch();
   }, [control]);
 
-  console.log(recipes[0]);
+  // console.log(recipes[0]);
   return (
     <>
       <div className="space-y-12 bg-white">

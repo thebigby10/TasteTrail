@@ -42,7 +42,7 @@ const RecipeForm = ({
   };
 
   return (
-    <div className="max-w-4xl bg-white mx-auto mt-8 p-8">
+    <div className="max-w-4xl bg-white mx-auto p-2 md:px-8">
       <h2 className="text-3xl font-bold mb-6 pb-2 text-center border-b border-second">
         Create Recipe
       </h2>

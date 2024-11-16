@@ -7,6 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { BsFire } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
 import { NavLink } from "react-router-dom";
+import superBg from "../../assets/images/Background/super_bg.jpeg";
 
 export function Sidebar() {
   const { user, logOut } = useAuth();
@@ -17,8 +18,16 @@ export function Sidebar() {
     }`;
 
   return (
-    <Card className="h-[calc(100vh-40px)] w-12 md:w-44 flex flex-col rounded-none justify-between p-1 md:p-4">
-      <List className="space-y-6">
+    <Card
+      className="relative h-[calc(100vh-40px)] w-12 md:w-40 flex flex-col rounded-none justify-between p-1 md:p-4"
+      style={{
+        backgroundImage: `url(${superBg})`,
+      }}
+    >
+      {/* Semi-transparent overlay */}
+      <div className="absolute inset-0 bg-white opacity-90 z-0" />
+      
+      <List className="space-y-6 z-10 relative">
         <ListItem>
           <NavLink to="/" className={linkClasses}>
             <ListItemPrefix>
@@ -60,7 +69,8 @@ export function Sidebar() {
           </NavLink>
         </ListItem>
       </List>
-      <List>
+      
+      <List className="z-20 relative"> 
         {user ? (
           <ListItem
             onClick={logOut}

@@ -7,6 +7,7 @@ import Login from "../shared/Login/Login";
 import Register from "../shared/Register/Register";
 import RecipeDetails from "../pages/Recipe/RecipeDetails";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import Trending from "../pages/TrendingPage/Trending";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             <RecipeDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/trending",
+        element: <Trending />,
       },
       {
         path: "/profile",
