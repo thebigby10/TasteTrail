@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'django_q',
     'user',
     'recipe',
+
 ]
 
 MIDDLEWARE = [
@@ -85,6 +87,8 @@ DATABASES = {
         'NAME': 'tastetrail_db',
         'USER': 'admin',
         'PASSWORD': 'admin',
+        'HOST':'localhost', #needs update
+        'PORT':'3306',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -133,3 +137,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+Q_CLUSTER = {
+    'name': 'myproject',
+    'workers': 8,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'cpu_affinity': 1,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'label': 'Django Q',
+    'orm' : 'defaule'
+}

@@ -4,39 +4,60 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { uploadImage } from "../../utils/uploadImage";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
 
   const { createUser, updateUser, loading, setLoading } = useAuth();
 
   const navigate = useNavigate();
 
+  const imgbb = async (image) => {
+    setLoading(true);
+    const result = await uploadImage(image);
+    return result;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log({ fullName, email, password, imageUrl });
+
+
+    const imageUrl = await imgbb(e.target.image.files[0]);
+    // console.log({ fullName, email, password, imageUrl });
 
     try {
       setLoading(true);
-      await createUser(email, password).then(() => {
-        updateUser(fullName, imageUrl).then(async () => {
-          toast.success("User Register Success");
-          navigate("/");
-          setLoading(false);
-          const data = await axios.post("http://127.0.0.1:8000/user/register", {
-            fullName,
-            email,
-            imageUrl,
-          });
-          console.log(data);
+      if(imageUrl){
+        const data = await axios.post("http://127.0.0.1:8000/user/register/", {
+          fullName,
+          email,
+          imageUrl,
         });
-      });
+        if (data.status == 200) {
+          await createUser(email, password).then(() => {
+            updateUser(fullName, imageUrl).then(() => {
+              toast.success("User Register Success");
+              navigate("/");
+              setLoading(false);
+            });
+          });
+        }
+      }else{
+        Swal.fire({
+          icon: "error",
+          text: "Please Try Again!!",
+          confirmButtonColor: "#7e8940",
+        });
+      }
     } catch (error) {
       toast.error(error.message || error);
-      setLoading(false); 
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,7 +69,6 @@ const Register = () => {
           setFullName={setFullName}
           setEmail={setEmail}
           setPassword={setPassword}
-          setImageUrl={setImageUrl}
           handleRegister={handleRegister}
         />
       </div>
