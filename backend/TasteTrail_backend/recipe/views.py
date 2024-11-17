@@ -94,7 +94,9 @@ def trending(request):
     if request.method == 'GET':
         recipe_list = []
         for recipe in recipes:
-            recipe_list.append({'pk':recipe.postID,'data':model_to_dict(recipe)})
+            user = User.objects.get(email=recipe.user)
+            created_at = recipe.created_at
+            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':created_at})
         return JsonResponse(recipe_list, status=200, safe=False)
 
 def get_trending():
@@ -246,5 +248,5 @@ def search(request, keywords):
 @csrf_exempt
 def comment(request, post_id):
     if request.method == 'POST':
-        
+
         return HttpResponse(status=200)
