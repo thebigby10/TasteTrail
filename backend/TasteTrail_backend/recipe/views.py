@@ -22,6 +22,8 @@ from django.utils.timesince import timesince
 
 # from recipe.trending_calculate import trigger_task
 
+from rapidfuzz import fuzz
+
 # Create your views here.
 
 # recipe/add/
@@ -42,7 +44,9 @@ def add(request):
         # print(f"data: {title}, {imgUrl}, {user}, {tags}, {location}, {ingredients}, {description}")
         recipe = Recipe(title=title, imgUrl=imgUrl, user=user, tags=tags, location=location, ingredients=ingredients, description=description)
         recipe.save()
-    return HttpResponse(status=200)
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
 
 #return random 10 posts
 #recipe/
@@ -193,3 +197,27 @@ def dislike(request):
             # recipe.likes.append(user_email)
             # recipe.save()
         # return HttpResponse(status=200)
+
+# recipe/similar_post/{post_id}/
+def similar_post(request, post_id):
+    # match based on tag similarity
+    post = Recipe.objects.get(postID = post_id)
+    all_post = Recipe.objects.all()
+    similar_post = []
+    similarity = []
+    for recipe in all_post:
+        # print(recipe.tags)
+        similarity_value = fuzz.QRatio(" ".join(recipe.tags), " ".join(post.tags))
+        similarity.append((recipe, similarity_value))
+    # print(post_with_score)
+    similarity.sort(key = lambda x: x[1], reverse=True)
+    # return JsonResponse(post_with_score, status=200, safe=False)
+    # similarity_json = model_to_dict(similarity[:10])
+    similarity_json = []
+    for recipe in similarity[:10]:
+        similarity_json.append(model_to_dict(recipe[0]))
+    return JsonResponse(similarity_json, status=200, safe=False)
+
+#recipe/comment/{post_id}/
+def comment(request, post_id):
+    return HttpResponse(status=200)
