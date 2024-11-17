@@ -13,4 +13,6 @@ urlpatterns = [
     path('like/', views.like, name = 'like'),
     path('dislike/', views.dislike, name = 'dislike'),
     path('similar_post/<uuid:post_id>', views.similar_post, name = 'similar_post'),
+    path('comment/<uuid:post_id>', views.comment, name = 'comment'),
+    path('search/<str:keywords>', views.search, name = 'search'),
 ]

@@ -223,6 +223,26 @@ def similar_post(request, post_id):
         })
     return JsonResponse(similarity_json, status=200, safe=False)
 
+# /recipe/search/keywords/
+def search(request, keywords):
+    print(keywords)
+    recipes = Recipe.objects.all()
+    similar_recipes_with_score = []
+    for recipe in recipes:
+        similarity_value = fuzz.QRatio(keywords, " ".join(recipe.tags)+" "+recipe.title+" "+" ".join(recipe.ingredients)+" "+recipe.location)
+        similar_recipes_with_score.append((recipe, similarity_value))
+    similar_recipes_with_score.sort(key = lambda x: x[1], reverse=True)
+    similarity_json = []
+    for recipe in similar_recipes_with_score[:3]:
+        similarity_json.append({
+            'pk': recipe[0].postID,
+            'user' : model_to_dict(User.objects.get(email=recipe[0].user_id)),
+            'data': model_to_dict(recipe[0])
+        })
+    return JsonResponse(similarity_json, status=200, safe=False)
+
+
 #recipe/comment/{post_id}/
 def comment(request, post_id):
-    return HttpResponse(status=200)
+
+    return HttpResponse(status=69)
