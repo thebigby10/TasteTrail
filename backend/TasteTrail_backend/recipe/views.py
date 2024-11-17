@@ -215,7 +215,12 @@ def similar_post(request, post_id):
     # similarity_json = model_to_dict(similarity[:10])
     similarity_json = []
     for recipe in similarity[:10]:
-        similarity_json.append(model_to_dict(recipe[0]))
+
+        similarity_json.append({
+            'pk': recipe[0].postID,
+            'user' : model_to_dict(User.objects.get(email=recipe[0].user_id)),
+            'data': model_to_dict(recipe[0])
+        })
     return JsonResponse(similarity_json, status=200, safe=False)
 
 #recipe/comment/{post_id}/
