@@ -243,6 +243,8 @@ def search(request, keywords):
 
 
 #recipe/comment/{post_id}/
+@csrf_exempt
 def comment(request, post_id):
-
-    return HttpResponse(status=69)
+    if request.method == 'POST':
+        
+        return HttpResponse(status=200)
