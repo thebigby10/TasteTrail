@@ -248,5 +248,10 @@ def search(request, keywords):
 @csrf_exempt
 def comment(request, post_id):
     if request.method == 'POST':
-
+        data = json.loads(request.body)
+        comment = data['comment']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = post_id)
+        recipe.comments.append({'userEmail':userEmail,'comment':comment})
+        recipe.save()
         return HttpResponse(status=200)
