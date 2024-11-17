@@ -27,6 +27,31 @@ def register(request):
             user = User(fullName=fullname, email=email, imageUrl=imageUrl)
             user.save()
             return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
+
+
+#/user/followings/{user_email}/
+def followings(request, user_email):
+    print(user_email)
+    user = User.objects.get(email=user_email)
+    followers = user.following.all()
+    followers_json = []
+    for follower in followers:
+        user = User.objects.get(email=follower.email)
+        followers_json.append(model_to_dict(user))
+    return JsonResponse(followers_json, status=200, safe=False)
+
+#/user/followers/{user_email}/
+def followers(request, user_email):
+    print(user_email)
+    user = User.objects.get(email=user_email)
+    followers = user.followers.all()
+    followers_json = []
+    for follower in followers:
+        user = User.objects.get(email=follower.email)
+        followers_json.append(model_to_dict(user))
+    return JsonResponse(followers_json, status=200, safe=False)
 
 
 #/user/followings/{user_email}/
