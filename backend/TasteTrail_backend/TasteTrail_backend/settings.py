@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'django_q',
     'user',
     'recipe',
 
@@ -103,7 +102,7 @@ DATABASES = {
                         # 'ssl_key': '/path/to/client-key.pem',    # Optional, if needed
                     },
                 },
-        
+
     }
 }
 
