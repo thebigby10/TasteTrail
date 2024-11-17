@@ -6,9 +6,11 @@ import { useEffect, useRef } from "react";
 import LikeDislike from "./LikeDislike";
 import Comments from "./comments/Comments";
 import WriteComment from "./comments/WriteComment";
+import useRecipe from "../hooks/useRecipe";
 
 const SingleRecipe = ({ recipe, setControl, control }) => {
   const { user: currentUser } = useAuth();
+  const {fetchSimilarRecipes} = useRecipe();
   const { pk, user, data, created_at } = recipe || {};
   const {
     imgUrl: recipeImg,
@@ -27,7 +29,7 @@ const SingleRecipe = ({ recipe, setControl, control }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            console.log(pk);
+            fetchSimilarRecipes(pk);
           }
         });
       },

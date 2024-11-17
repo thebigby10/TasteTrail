@@ -214,7 +214,7 @@ def dislike(request):
         # return HttpResponse(status=200)
         # return HttpResponse(status=200)
 
-# recipe/similar_post/{post_id}/
+# recipe/similar_post/{post_id}
 def similar_post(request, post_id):
     # match based on tag similarity
     post = Recipe.objects.get(postID = post_id)

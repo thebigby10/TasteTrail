@@ -21,22 +21,22 @@ const RecipeForm = ({
 }) => {
   const handleKeyPressTag = (e) => {
     if (e.key === ",") {
-      e.preventDefault(); 
-      const sanitizedTag = tagInput.trim().replace(/,$/, ""); 
+      e.preventDefault();
+      const sanitizedTag = tagInput.trim().replace(/,$/, "");
       if (sanitizedTag) {
-        handleAddTag(sanitizedTag); 
-        setTagInput(""); 
+        handleAddTag(sanitizedTag);
+        setTagInput("");
       }
     }
   };
 
   const handleKeyPressIngredient = (e) => {
     if (e.key === ",") {
-      e.preventDefault(); 
-      const sanitizedIngredient = ingredientInput.trim().replace(/,$/, ""); 
+      e.preventDefault();
+      const sanitizedIngredient = ingredientInput.trim().replace(/,$/, "");
       if (sanitizedIngredient) {
-        handleAddIngredient(sanitizedIngredient); 
-        setIngredientInput(""); 
+        handleAddIngredient(sanitizedIngredient);
+        setIngredientInput("");
       }
     }
   };
@@ -79,7 +79,7 @@ const RecipeForm = ({
               type="text"
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
-              onKeyDown={handleKeyPressTag} 
+              onKeyDown={handleKeyPressTag}
               className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
               placeholder="Add a tag"
             />
@@ -106,7 +106,7 @@ const RecipeForm = ({
               type="text"
               value={ingredientInput}
               onChange={(e) => setIngredientInput(e.target.value)}
-              onKeyDown={handleKeyPressIngredient} // Updated logic
+              onKeyDown={handleKeyPressIngredient}
               className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
               placeholder="Add an ingredient"
             />
@@ -129,6 +129,7 @@ const RecipeForm = ({
             type="text"
             onChange={(e) => setLocation(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
+            required={true}
           />
         </div>
 
@@ -140,7 +141,7 @@ const RecipeForm = ({
             onChange={setDescription}
             className="bg-white border border-gray-300 rounded focus:outline-none focus:border-second h-40 mb-6"
             placeholder="Detailed Recipe Description..."
-            required
+            required={true}
           />
         </div>
 

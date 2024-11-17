@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { router } from "./routes/Routes";
 import superbg from "./assets/images/Background/super_bg.jpeg";
 import RefetchProvider from "./providers/RefetchProvider";
+import RecipeProvider from "./providers/RecipeProvider";
 
 createRoot(document.getElementById("root")).render(
   <div
@@ -18,7 +19,9 @@ createRoot(document.getElementById("root")).render(
       <>
         <AuthProvider>
           <RefetchProvider>
-            <RouterProvider router={router} />
+            <RecipeProvider>
+              <RouterProvider router={router} />
+            </RecipeProvider>
           </RefetchProvider>
         </AuthProvider>
         <Toaster />
