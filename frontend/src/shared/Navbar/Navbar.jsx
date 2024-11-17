@@ -7,7 +7,6 @@ const Navbar = () => {
   const [searchText, setSearchText] = useState("");
 
   const { user } = useAuth();
-  console.log(user);
 
   const handleSearch = (e) => {
     e.preventDefault();

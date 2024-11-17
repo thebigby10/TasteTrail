@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
-import { IoSend } from "react-icons/io5";
 import useAuth from "../hooks/useAuth";
 import DropDown from "./DropDown";
 import { useEffect, useRef } from "react";
+import LikeDislike from "./LikeDislike";
+import Comments from "./comments/Comments";
+import WriteComment from "./comments/WriteComment";
 
 const SingleRecipe = ({ recipe, setControl, control }) => {
   const { user: currentUser } = useAuth();
@@ -97,36 +98,10 @@ const SingleRecipe = ({ recipe, setControl, control }) => {
         <Link to={`/recipe-details/${pk}`}>...more</Link>
       </div>
       <div className="flex justify-between space-x-2 text-sm dark:text-gray-600">
-        <div className="flex gap-8">
-          <div className="flex items-center gap-2">
-            <button>
-              <AiOutlineLike size={30} />
-            </button>
-            {likes?.length || 0}
-          </div>
-          <div className="flex items-center gap-2">
-            <button>
-              <AiOutlineDislike size={30} />
-            </button>
-            {dislikes?.length || 0}
-          </div>
-        </div>
-        <div>
-          <button>
-            <p>Comments: {comments?.length || 0}</p>
-          </button>
-        </div>
+        <LikeDislike id={pk} likes={likes} dislikes={dislikes} />
+        <Comments comments={comments} />
       </div>
-      <div className="flex">
-        <input
-          type="text"
-          placeholder="Drop a comment"
-          className="w-full px-4 py-2 rounded-l-full border border-second focus:outline-none"
-        />
-        <button className="bg-second px-4 text-white rounded-r-full">
-          <IoSend size={25} />
-        </button>
-      </div>
+      <WriteComment />
     </div>
   );
 };

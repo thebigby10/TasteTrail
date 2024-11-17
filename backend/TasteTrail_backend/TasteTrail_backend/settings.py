@@ -88,8 +88,6 @@ DATABASES = {
         'PASSWORD': 'admin',
         'HOST':'localhost', #needs update
         'PORT':'3306',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
     }
 }
 
