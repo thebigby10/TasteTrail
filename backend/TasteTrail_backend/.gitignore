@@ -2,8 +2,6 @@ recipe/migrations/
 TasteTrail_backend/__pycache__/
 user/__pycache__/
 archive/
-<<<<<<< HEAD
 .env
-=======
-.env
->>>>>>> asif-dev
+__pycache__/
+

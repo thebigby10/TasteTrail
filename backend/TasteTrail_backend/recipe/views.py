@@ -94,7 +94,9 @@ def trending(request):
     if request.method == 'GET':
         recipe_list = []
         for recipe in recipes:
-            recipe_list.append({'pk':recipe.postID,'data':model_to_dict(recipe)})
+            user = User.objects.get(email=recipe.user)
+            created_at = recipe.created_at
+            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':created_at})
         return JsonResponse(recipe_list, status=200, safe=False)
 
 def get_trending():
@@ -215,6 +217,8 @@ def dislike(request):
         # return HttpResponse(status=200)
 
 # recipe/similar_post/{post_id}
+
+# recipe/similar_post/{post_id}/
 def similar_post(request, post_id):
     # match based on tag similarity
     post = Recipe.objects.get(postID = post_id)
@@ -262,6 +266,11 @@ def search(request, keywords):
 @csrf_exempt
 def comment(request, post_id):
     if request.method == 'POST':
-        
+        data = json.loads(request.body)
+        comment = data['comment']
+        userEmail = data['userEmail']
+        recipe = Recipe.objects.get(postID = post_id)
+        recipe.comments.append({'userEmail':userEmail,'comment':comment})
+        recipe.save()
         return HttpResponse(status=200)
 

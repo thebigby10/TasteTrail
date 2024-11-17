@@ -54,27 +54,6 @@ def followers(request, user_email):
     return JsonResponse(followers_json, status=200, safe=False)
 
 
-#/user/followings/{user_email}/
-def followings(request, user_email):
-    print(user_email)
-    user = User.objects.get(email=user_email)
-    followers = user.following.all()
-    followers_json = []
-    for follower in followers:
-        user = User.objects.get(email=follower.email)
-        followers_json.append(model_to_dict(user))
-    return JsonResponse(followers_json, status=200, safe=False)
-
-#/user/followers/{user_email}/
-def followers(request, user_email):
-    print(user_email)
-    user = User.objects.get(email=user_email)
-    followers = user.followers.all()
-    followers_json = []
-    for follower in followers:
-        user = User.objects.get(email=follower.email)
-        followers_json.append(model_to_dict(user))
-    return JsonResponse(followers_json, status=200, safe=False)
 
 #/user/follow/
 def follow(request):
