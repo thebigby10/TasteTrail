@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,14 +82,26 @@ WSGI_APPLICATION = 'TasteTrail_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+print(os.getenv('USER_NAME'))
+print(os.getenv('PASS_WORD'))
+print(os.getenv('HOST'))
+print(os.getenv('PORT'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tastetrail_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST':'localhost', #needs update
-        'PORT':'3306',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('USER_NAME'),
+        'PASSWORD': os.getenv('PASS_WORD'),
+        'HOST':os.getenv('HOST'), #needs update
+        'PORT':os.getenv('PORT'),
+        'OPTIONS': {
+                    'ssl': {
+                        'ca': 'ca.pem',
+                        # 'ssl_cert': '/path/to/client-cert.pem',  # Optional, if needed
+                        # 'ssl_key': '/path/to/client-key.pem',    # Optional, if needed
+                    },
+                },
     }
 }
 
