@@ -27,6 +27,8 @@ def register(request):
             user = User(fullName=fullname, email=email, imageUrl=imageUrl)
             user.save()
             return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
 
 
 #/user/followings/{user_email}/

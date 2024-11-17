@@ -7,4 +7,5 @@ urlpatterns = [
     path('followers/<str:user_email>',views.followers, name = 'followers'),
     path('follow/',views.follow, name = 'follow'),
     path('unfollow/',views.unfollow, name = 'unfollow'),
+    
 ]
