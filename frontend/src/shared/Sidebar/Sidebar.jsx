@@ -24,7 +24,6 @@ export function Sidebar() {
         backgroundImage: `url(${superBg})`,
       }}
     >
-      {/* Semi-transparent overlay */}
       <div className="absolute inset-0 bg-white opacity-90 z-0" />
       
       <List className="space-y-6 z-10 relative">
