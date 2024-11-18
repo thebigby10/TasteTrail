@@ -7,6 +7,8 @@ load_dotenv()
 
 ROOT_PASSWORD = os.getenv('ROOT_PASSWORD')
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls'), name = "user"),
