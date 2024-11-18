@@ -1,0 +1,92 @@
+[
+    {
+        "pk": "1a3cdbac9-8479-4560-8da6-86552c661218",
+        "data": {
+            "title": "Spicy Chicken Curry",
+            "imgUrl": "https://www.foodandwine.com/thmb/8YAIANQTZnGpVWj2XgY0dYH1V4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/spicy-chicken-curry-FT-RECIPE0321-58f84fdf7b484e7f86894203eb7834e7.jpg",
+            "user": "foodlover01@mailinator.com",
+            "tags": ["dinner", "spicy", "Indian"],
+            "location": "Mumbai, India",
+            "ingredients": ["chicken", "onion", "garlic", "ginger", "spices", "tomato", "chili"],
+            "description": "<p>This spicy chicken curry is a delight for the senses, filled with aromatic spices, tender chicken, and a rich, flavorful sauce. Perfect for those who enjoy a bit of heat in their meals. This dish is a staple in Indian households, bringing warmth and comfort with every bite. Serve with steamed rice or warm naan bread to soak up the delicious curry.</p>",
+            "likes": ["user123", "user456", "user789"],
+            "dislikes": [],
+            "comments": ["Absolutely loved it!", "Perfect spice level!"]
+        }
+    },
+    {
+        "pk": "2b4dcae7-9470-4861-8e27-97562b671319",
+        "data": {
+            "title": "Vegan Buddha Bowl",
+            "imgUrl": "https://herbivoreskitchen.com/wp-content/uploads/2020/09/IMG_0095-2.jpg",
+            "user": "veganvibes@mailinator.com",
+            "tags": ["lunch", "vegan", "healthy"],
+            "location": "Portland, USA",
+            "ingredients": ["quinoa", "chickpeas", "avocado", "spinach", "carrots", "hummus"],
+            "description": "<p>This vibrant vegan Buddha bowl is a wholesome and balanced meal, filled with nutrient-dense ingredients like quinoa, chickpeas, and fresh vegetables. Each ingredient complements the others, creating a harmonious combination of flavors and textures. Topped with creamy hummus and fresh avocado, this bowl is both satisfying and nourishing, perfect for a healthy lunch or dinner.</p>",
+            "likes": ["user234", "user567"],
+            "dislikes": ["user890"],
+            "comments": ["My go-to lunch!", "So filling and healthy."]
+        }
+    },
+    {
+        "pk": "3c5ebdf8-8571-4962-9f38-18572c681420",
+        "data": {
+            "title": "Classic Margherita Pizza",
+            "imgUrl": "https://media-cdn2.greatbritishchefs.com/media/na2pq3dp/gbc-allinsons-133-lowres.whqc_768x512q80.jpg",
+            "user": "pizzalover@mailinator.com",
+            "tags": ["dinner", "pizza", "Italian"],
+            "location": "Naples, Italy",
+            "ingredients": ["pizza dough", "tomato sauce", "mozzarella", "basil", "olive oil"],
+            "description": "<p>This classic Margherita pizza is a timeless favorite, celebrated for its simplicity and fresh ingredients. A crispy, golden crust is topped with tangy tomato sauce, creamy mozzarella cheese, and fresh basil leaves. Drizzled with a touch of olive oil, every bite transports you to the heart of Italy. This is the perfect meal to enjoy with friends and family, embodying the authentic flavors of Italian cuisine.</p>",
+            "likes": ["user345", "user678", "user910"],
+            "dislikes": [],
+            "comments": ["Authentic taste!", "Reminds me of Italy."]
+        }
+    },
+    {
+        "pk": "4d6fcce9-9672-4a73-9f49-29582d691521",
+        "data": {
+            "title": "Avocado Toast",
+            "imgUrl": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/avocado-on-toast-96e3158.jpg",
+            "user": "brunchenthusiast@mailinator.com",
+            "tags": ["breakfast", "quick", "vegan"],
+            "location": "Los Angeles, USA",
+            "ingredients": ["avocado", "bread", "salt", "pepper", "lemon", "red pepper flakes"],
+            "description": "<p>This trendy avocado toast combines creamy avocado with crunchy toast for a satisfying and nutritious breakfast. The avocado is mashed to perfection, seasoned with a hint of lemon and a pinch of salt, and topped with red pepper flakes for an extra kick. It's quick to prepare and full of healthy fats, making it a perfect start to the day or a light meal.</p>",
+            "likes": ["user111", "user222"],
+            "dislikes": [],
+            "comments": ["So simple, yet so tasty!", "Perfect breakfast!"]
+        }
+    },
+    {
+        "pk": "5e7gdfg0-9783-4b84-af59-30592e7a1522",
+        "data": {
+            "title": "Chocolate Brownies",
+            "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRViajaK-0kJYSXO9bv7LeDGaN6F0brrvegKw&s",
+            "user": "sweettooth@mailinator.com",
+            "tags": ["dessert", "chocolate", "baking"],
+            "location": "New York, USA",
+            "ingredients": ["chocolate", "flour", "sugar", "butter", "eggs"],
+            "description": "<p>These chocolate brownies are an indulgent treat for any chocolate lover. With a rich, fudgy texture and a deep chocolate flavor, they’re perfect for satisfying a sweet tooth. Whether enjoyed warm with a scoop of vanilla ice cream or as a snack on their own, these brownies are guaranteed to please. Great for sharing with friends or family, or for treating yourself to something special.</p>",
+            "likes": ["user555", "user666"],
+            "dislikes": ["user333"],
+            "comments": ["Best brownies ever!", "So rich and decadent."]
+        }
+    },
+    {
+        "pk": "6f8hegf1-9884-4c95-bf69-415a3f7b1723",
+        "data": {
+            "title": "Sushi Rolls",
+            "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmZ9IOhG_pN7A65wRK6gyoUkxUu_h12FZ5dA&s",
+            "user": "sushifan@mailinator.com",
+            "tags": ["dinner", "Japanese", "healthy"],
+            "location": "Tokyo, Japan",
+            "ingredients": ["rice", "nori", "fish", "avocado", "cucumber"],
+            "description": "<p>These sushi rolls offer a taste of Japan, with a combination of fresh fish, creamy avocado, and crunchy cucumber wrapped in nori and seasoned rice. Perfect for a light yet satisfying meal, these rolls are as fun to make as they are to eat. Serve with soy sauce, wasabi, and pickled ginger for an authentic sushi experience.</p>",
+            "likes": ["user777", "user888"],
+            "dislikes": ["user999"],
+            "comments": ["Tastes just like at the restaurant!"]
+        }
+    }
+]

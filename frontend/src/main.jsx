@@ -1,50 +1,31 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-import App from "./App";
-import Login from "./shared/Login/Login";
-import Register from "./shared/Register/Register";
+import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./providers/AuthProvider";
 import { Toaster } from "react-hot-toast";
-import AddRecipe from "./pages/Recipe/AddRecipe";
-import PrivateRoute from "./routes/PrivateRoute";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      {
-        path: "/",
-        element: <App />,
-      },
-      {
-        path: "/add-recipe",
-        element: (
-          <PrivateRoute>
-            <AddRecipe />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-    ],
-  },
-]);
+import { router } from "./routes/Routes";
+import superbg from "./assets/images/Background/super_bg.jpeg";
+import RefetchProvider from "./providers/RefetchProvider";
+import RecipeProvider from "./providers/RecipeProvider";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-    <Toaster />
-  </StrictMode>
+  <div
+    className="bg-opacity-50 bg-center"
+    style={{
+      background: `url(${superbg})`,
+    }}
+  >
+    <div className="max-w-7xl mx-auto">
+      <>
+        <AuthProvider>
+          <RefetchProvider>
+            <RecipeProvider>
+              <RouterProvider router={router} />
+            </RecipeProvider>
+          </RefetchProvider>
+        </AuthProvider>
+        <Toaster />
+      </>
+    </div>
+  </div>
 );

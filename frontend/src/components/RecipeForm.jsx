@@ -20,20 +20,32 @@ const RecipeForm = ({
   loading,
 }) => {
   const handleKeyPressTag = (e) => {
-    if (e.key === " " && tagInput.trim()) {
-      handleAddTag();
+    if (e.key === ",") {
+      e.preventDefault();
+      const sanitizedTag = tagInput.trim().replace(/,$/, "");
+      if (sanitizedTag) {
+        handleAddTag(sanitizedTag);
+        setTagInput("");
+      }
     }
   };
 
   const handleKeyPressIngredient = (e) => {
-    if (e.key === " " && ingredientInput.trim()) {
-      handleAddIngredient();
+    if (e.key === ",") {
+      e.preventDefault();
+      const sanitizedIngredient = ingredientInput.trim().replace(/,$/, "");
+      if (sanitizedIngredient) {
+        handleAddIngredient(sanitizedIngredient);
+        setIngredientInput("");
+      }
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-8 shadow-lg rounded-lg bg-white">
-      <h2 className="text-3xl font-bold mb-6 pb-2 text-center border-b border-second">Add Recipe</h2>
+    <div className="max-w-4xl bg-white mx-auto p-2 md:px-8">
+      <h2 className="text-3xl font-bold mb-6 pb-2 text-center border-b border-second">
+        Create Recipe
+      </h2>
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
@@ -54,17 +66,20 @@ const RecipeForm = ({
             type="file"
             name="image"
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
+            required
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold">Tags</label>
+          <label className="block text-gray-700 font-semibold">
+            Tags (Ex: Tag1,Tag2)
+          </label>
           <div className="flex space-x-2">
             <input
               type="text"
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
-              onKeyUp={handleKeyPressTag}
+              onKeyDown={handleKeyPressTag}
               className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
               placeholder="Add a tag"
             />
@@ -84,14 +99,14 @@ const RecipeForm = ({
 
         <div>
           <label className="block text-gray-700 font-semibold">
-            Ingredients
+            Ingredients (Ex: ingre1,ingre2)
           </label>
           <div className="flex space-x-2">
             <input
               type="text"
               value={ingredientInput}
               onChange={(e) => setIngredientInput(e.target.value)}
-              onKeyUp={handleKeyPressIngredient}
+              onKeyDown={handleKeyPressIngredient}
               className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
               placeholder="Add an ingredient"
             />
@@ -101,7 +116,7 @@ const RecipeForm = ({
               <span
                 key={index}
                 onClick={() => handleRemoveIngredient(index)}
-                className={`px-2 py-1 m-1 bg-gray-100 text-gray-800 rounded-full cursor-pointer hover:bg-red-500 hover:text-white`}
+                className="px-2 py-1 m-1 bg-gray-100 text-gray-800 rounded-full cursor-pointer hover:bg-red-500 hover:text-white"
               >
                 {ingredient}
               </span>
@@ -114,6 +129,7 @@ const RecipeForm = ({
             type="text"
             onChange={(e) => setLocation(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-second"
+            required={true}
           />
         </div>
 
@@ -125,6 +141,7 @@ const RecipeForm = ({
             onChange={setDescription}
             className="bg-white border border-gray-300 rounded focus:outline-none focus:border-second h-40 mb-6"
             placeholder="Detailed Recipe Description..."
+            required={true}
           />
         </div>
 

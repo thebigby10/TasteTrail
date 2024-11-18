@@ -102,7 +102,6 @@ DATABASES = {
                         # 'ssl_key': '/path/to/client-key.pem',    # Optional, if needed
                     },
                 },
-
     }
 }
 

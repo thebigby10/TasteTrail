@@ -53,6 +53,8 @@ def followers(request, user_email):
         followers_json.append(model_to_dict(user))
     return JsonResponse(followers_json, status=200, safe=False)
 
+
+
 #/user/follow/
 def follow(request):
     data = json.loads(request.body)

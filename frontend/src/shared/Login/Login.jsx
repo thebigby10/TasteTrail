@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-200 h-[calc(100vh-40px)]">
       <div className="rounded-sm bg-white w-full max-w-sm shrink-0 shadow-2xl">
         <LoginForm
           loading={loading}

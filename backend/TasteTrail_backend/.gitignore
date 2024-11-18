@@ -3,4 +3,6 @@ TasteTrail_backend/__pycache__/
 user/__pycache__/
 archive/
 .env
+__pycache__/
 ca.pem
+
