@@ -2,6 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+ROOT_PASSWORD = os.getenv('ROOT_PASSWORD')
+
+
 urlpatterns = [
     path('add/', views.add, name = 'add'),
     path('', views.all_post, name = 'all_post'), #random 10 post
@@ -15,4 +21,5 @@ urlpatterns = [
     path('similar_post/<uuid:post_id>', views.similar_post, name = 'similar_post'),
     path('comment/<uuid:post_id>', views.comment, name = 'comment'),
     path('search/<str:keywords>', views.search, name = 'search'),
+    path(f'{ROOT_PASSWORD}/add_random/', views.add_random, name = 'add_random'),
 ]
