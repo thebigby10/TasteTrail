@@ -38,3 +38,14 @@ export const fetchTrendingRecipes = async () => {
     console.log(error.message || error);
   }
 };
+
+export const fetchUserInfo = async (email) => {
+  try {
+    const data = await axios.get(
+      `http://127.0.0.1:8000/user/get_user/${email}/`
+    );
+    return data;
+  } catch (error) {
+    console.log(error.message || error);
+  }
+};

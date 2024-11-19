@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 
-const Profile = () => {
+const Profile = ({userInfo, totalRecipes}) => {
+    console.log(userInfo, totalRecipes);
     return (
         <div>
-            Profile comming.
+            Profile comming soon....
         </div>
     );
 };

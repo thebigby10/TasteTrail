@@ -25,13 +25,15 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (password?.length < 6)
+      return toast.error("Password should be atleast 6 characters!!");
 
     const imageUrl = await imgbb(e.target.image.files[0]);
     // console.log({ fullName, email, password, imageUrl });
 
     try {
       setLoading(true);
-      if(imageUrl){
+      if (imageUrl) {
         const data = await axios.post("http://127.0.0.1:8000/user/register/", {
           fullName,
           email,
@@ -46,7 +48,7 @@ const Register = () => {
             });
           });
         }
-      }else{
+      } else {
         Swal.fire({
           icon: "error",
           text: "Please Try Again!!",
