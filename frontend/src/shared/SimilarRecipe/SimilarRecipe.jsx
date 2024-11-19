@@ -3,10 +3,17 @@ import superBg from "../../assets/images/Background/super_bg.jpeg";
 import SimilarRecipeCard from "../../components/SimilarRecipeCard";
 import useRecipe from "../../hooks/useRecipe";
 import { MdRecommend } from "react-icons/md";
+import ReactLoading from "react-loading";
 
 const SimilarRecipe = () => {
-  const { similarRecipes } = useRecipe();
+  const { similarRecipes, loading } = useRecipe();
 
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen w-60 bg-white">
+        <ReactLoading type={"balls"} color="#7E8940" />
+      </div>
+    );
   return (
     <div
       className="relative w-60 h-[calc(100vh-40px)] p-1 md:p-4"

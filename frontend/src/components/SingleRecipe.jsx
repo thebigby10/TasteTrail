@@ -95,7 +95,7 @@ const SingleRecipe = ({ recipe, setControl, control }) => {
           {title || "Untitled Recipe"}
         </h2>
         <div className="text-sm dark:text-gray-600">
-          <div dangerouslySetInnerHTML={{ __html: description || "" }} />
+          <div dangerouslySetInnerHTML={{ __html: description?.slice(0,200) || "" }} />
         </div>
         <Link to={`/recipe-details/${pk}`}>...more</Link>
       </div>
