@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from user.models import User
 
+from django.forms.models import model_to_dict
+
 from django.views.decorators.csrf import csrf_exempt
+
 
 # user/register/
 # Create your views here.
@@ -30,6 +33,11 @@ def register(request):
     else:
         return HttpResponse(status=400)
 
+# user/user_info/{user_email}/
+def user_info(request, user_email):
+    user = User.objects.get(email=user_email)
+    print(user)
+    return JsonResponse(model_to_dict(user), status=200, safe=False)
 
 #/user/followings/{user_email}/
 def followings(request, user_email):

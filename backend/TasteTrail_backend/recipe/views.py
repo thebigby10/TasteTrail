@@ -96,7 +96,8 @@ def trending(request):
         for recipe in recipes:
             user = User.objects.get(email=recipe.user)
             created_at = recipe.created_at
-            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':created_at})
+            time_diff = timesince(created_at, datetime.now(timezone.utc))
+            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':f"{time_diff} ago"})
         return JsonResponse(recipe_list, status=200, safe=False)
 
 def get_trending():
@@ -274,3 +275,18 @@ def comment(request, post_id):
         recipe.save()
         return HttpResponse(status=200)
 
+import requests
+
+# /recipe/root_password/random/,
+@csrf_exempt
+def add_random(request):
+    print(request.body)
+    if request.method == 'POST':
+        data = json.loads(request.body)["data"]
+        for i in data:
+            if i == "":
+                continue
+            requests.post(f"http://127.0.0.1:8000/recipe/add/",
+                json = i
+            );
+    return HttpResponse(status=200)
