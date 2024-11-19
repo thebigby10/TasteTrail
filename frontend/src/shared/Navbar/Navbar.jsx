@@ -41,7 +41,7 @@ const Navbar = () => {
               <FaSearch />
             </button>
           </form>
-          {user && (
+          {user ? (
             <Link to={"/profile"}>
               <img
                 alt={user?.fullName || "User Image"}
@@ -49,6 +49,11 @@ const Navbar = () => {
                 className="object-cover hidden md:flex w-8 h-8 rounded-full shadow dark:bg-gray-500"
               />
             </Link>
+          ) : (
+            <img
+              src="https://via.placeholder.com/150"
+              className="object-cover hidden md:flex w-8 h-8 rounded-full shadow dark:bg-gray-500"
+            />
           )}
         </div>
       </section>
