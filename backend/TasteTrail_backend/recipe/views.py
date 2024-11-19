@@ -96,7 +96,8 @@ def trending(request):
         for recipe in recipes:
             user = User.objects.get(email=recipe.user)
             created_at = recipe.created_at
-            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':created_at})
+            time_diff = timesince(created_at, datetime.now(timezone.utc))
+            recipe_list.append({'pk':recipe.postID,'user':model_to_dict(user) ,'data':model_to_dict(recipe), 'created_at':f"{time_diff} ago"})
         return JsonResponse(recipe_list, status=200, safe=False)
 
 def get_trending():
