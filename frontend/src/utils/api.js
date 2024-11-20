@@ -42,7 +42,7 @@ export const fetchTrendingRecipes = async () => {
 export const fetchUserInfo = async (email) => {
   try {
     const data = await axios.get(
-      `http://127.0.0.1:8000/user/get_user/${email}/`
+      `http://127.0.0.1:8000/user/user_info/${email}`
     );
     return data;
   } catch (error) {

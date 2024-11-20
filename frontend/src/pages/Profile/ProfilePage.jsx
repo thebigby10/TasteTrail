@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchRecipesForUser } from "../../utils/api";
+import { fetchRecipesForUser, fetchUserInfo } from "../../utils/api";
 import useAuth from "../../hooks/useAuth";
 import Recipes from "../Recipe/Recipes";
 import Profile from "./Profile";
@@ -17,18 +17,19 @@ const ProfilePage = () => {
     setRecipes(data?.data);
   };
 
-  const fetchUserInfo = async () => {
+  const fetchUser = async () => {
     const data = await fetchUserInfo(currentUser?.email);
     setUser(data?.data);
   };
 
   useEffect(() => {
-    fetchUserInfo();
+    fetchUser();
     fetch();
   }, [control, refetch]);
   return (
     <div>
       <Profile userInfo={user} totalRecipes={recipes?.length} />
+      <hr />
       <Recipes control={control} setControl={setControl} recipes={recipes} />
     </div>
   );
